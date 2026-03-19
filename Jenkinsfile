@@ -11,25 +11,25 @@ pipeline {
     }
 
     stages {
-        stage('Code Compilation") {
+        stage('Code Compilation') {
             steps {
                 echo 'Starting Code Compilation...'
                 sh 'mvn clean compile'
                 echo 'Code Compilation Completed Successfully!'
             }
         }
-        stage( 'Code QA Execution') {
+    stage( 'Code QA Execution') {
+        steps {
+            echo 'Running JUnit Test Cases...'
+            sh 'mvn clean test'
+            echo 'JUnit Test Cases Completed Successfully! '
+        }
+    }
+    stage('Code Package') {
             steps {
-                echo 'Running JUnit Test Cases...'
-                sh 'mvn clean test'
-                echo 'JUnit Test Cases Completed Successfully! '
-            }
-
-        stage('Code Package") {
-            steps {
-                'Creating WAR Artifact.."
+                echo 'Creating WAR Artifact..'
                 sh 'mvn clean package'
-                echo 'WAR Artifact Created Successfutly!"
+                echo 'WAR Artifact Created Successfully!'
             }
         }
     }
